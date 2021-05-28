@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "nodemon",
+    "postinstall": "cd node_modules/@apollographql && cp ../graphql-upload/ . -r && rm -rf graphql-upload-8-fork/ && mv graphql-upload/ graphql-upload-8-fork"
+  },
+  "dependencies": {
+    "apollo-server": "^2.25.0",
+    "apollo-server-express": "^2.25.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "graphql-upload": "^12.0.0",
+    "ottoman": "^2.0.0-beta.1"
+  }
+}

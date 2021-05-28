@@ -1,0 +1,8 @@
+env.js
+node_modules
+yarn.lock
+package-lock.json
+build/
+/*.log
+size-plugin.json
+yarn-error.log
