@@ -28,9 +28,20 @@
     "sirv-cli": "1.0.3"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.19",
+    "apollo-link": "^1.2.14",
+    "apollo-link-error": "^1.1.13",
+    "apollo-upload-client": "^15.0.0",
+    "graphql": "^15.5.0",
     "preact": "^10.3.2",
     "preact-cli": "^3.2.0",
     "preact-render-to-string": "^5.1.4",
-    "preact-router": "^3.2.1"
+    "preact-router": "^3.2.1",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "ts-invariant": "^0.7.3"
   }
 }
