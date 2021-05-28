@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd client && yarn lint && cd -
+cd server && yarn lint && cd -
+
+if [[ $? -eq 0  ]]
+then
+        echo "Lint Passed"
+        exit 0
+else
+        echo "Lint Failed"
+exit 1
+fi

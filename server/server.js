@@ -46,6 +46,7 @@ const server = new ApolloServer({
   typeDefs: schema,
   resolvers: resolvers,
   context: async ({ req }) => {
+    console.log(req.body);
     return {
       //All schemas here
     };

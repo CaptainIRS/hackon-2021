@@ -1,31 +1,50 @@
 import { h } from 'preact';
+// eslint-disable-next-line
 import {useEffect, useState} from "preact/hooks";
 import style from './style.css';
 
 // Note: `user` comes from the URL, courtesy of our router
+// eslint-disable-next-line
 const Profile = ({ user }) => {
-	const [time, setTime] = useState(Date.now());
-	const [count, setCount] = useState(10);
+  const [time, setTime] = useState(Date.now());
+  const [count, setCount] = useState(10);
 
-	useEffect(() => {
-		let timer = setInterval(() => setTime(Date.now()), 1000);
-		return () => clearInterval(timer);
-	}, []);
+  useEffect(() => {
+    const timer = setInterval(() => setTime(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-	return (
-		<div class={style.profile}>
-			<h1>Profile: {user}</h1>
-			<p>This is the user profile for a user named { user }.</p>
+  return (
+    <div className={style.profile}>
+      <h1>
+        Profile:
+        {' '}
+        {user}
+      </h1>
+      <p>
+        This is the user profile for a user named
+        {' '}
+        { user }
+        .
+      </p>
 
-			<div>Current time: {new Date(time).toLocaleString()}</div>
+      <div>
+        Current time:
+        {' '}
+        {new Date(time).toLocaleString()}
+      </div>
 
-			<p>
-				<button onClick={() => setCount((count) => count + 1)}>Click Me</button>
-				{' '}
-				Clicked {count} times.
-			</p>
-		</div>
-	);
+      <p>
+        <button type="submit" onClick={() => setCount((count) => count + 1)}>Click Me</button>
+        {' '}
+        Clicked
+        {' '}
+        {count}
+        {' '}
+        times.
+      </p>
+    </div>
+  );
 }
 
 export default Profile;
