@@ -5,14 +5,13 @@ import { useSelector } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { Table } from "reactstrap";
 import { useQuery } from "@apollo/client";
-import { ASSIGNMENT, PROFCOURSE } from "../../../graphql/query";
-import { Button } from "@material-ui/core";
+import { ASSIGNMENT } from "../../../graphql/query";
 import { IPFS } from "../../../env";
 const ViewSubmissions = ({ id }) => {
   const user = useSelector((state) => state.user);
   const theme = user.theme;
 
-  const { data, loading } = useQuery(ASSIGNMENT, { variables: { id: id } });
+  const { data, loading } = useQuery(ASSIGNMENT, { variables: { id } });
   const [subjects, setSubjects] = useState([]);
   const [isLoading, setIsloading] = useState(true);
   const [elements, setElements] = useState();
@@ -37,8 +36,8 @@ const ViewSubmissions = ({ id }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.assignment.submissions.map((submission) => (
-                    <tr>
+                  {data.assignment.submissions.map((submission, index) => (
+                    <tr key={index}>
                       <td>
                         <a href={`${IPFS}/${submission.ipfsHash}`}>
                           <span className="text-secondary">
@@ -72,10 +71,10 @@ const ViewSubmissions = ({ id }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.assignment.submissions.map((submission) => (
-                    <tr>
+                  {data.assignment.submissions.map((submission, index) => (
+                    <tr key={index}>
                       <td>
-                        <a href={`${IPFS}/${submissions.ipfsHash}`}>
+                        <a href={`${IPFS}/${submission.ipfsHash}`}>
                           <span className="text-white">
                             {`${submission.fileName}${
                               submission.islate ? ": late" : ""

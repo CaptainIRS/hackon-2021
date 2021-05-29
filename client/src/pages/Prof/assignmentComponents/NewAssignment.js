@@ -26,8 +26,10 @@ export default function NewAssignment() {
     if (!loading) {
       setSubjects(data.profCourse);
       setcourse(
-        data.profCourse.map((op) => (
-          <option value={op.courseCode}>{op.courseCode}</option>
+        data.profCourse.map((op, i) => (
+          <option key={i} value={op.courseCode}>
+            {op.courseCode}
+          </option>
         ))
       );
     }
@@ -45,22 +47,14 @@ export default function NewAssignment() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log({
-        question,
-        file,
-        courseCode: subject,
-        durationDay: parseInt(date),
-        durationHr: parseInt(hr),
-        durationMin: parseInt(min),
-      });
       mutate({
         variables: {
           question,
           file,
           courseCode: subject,
-          durationDay: parseInt(date),
-          durationHr: parseInt(hr),
-          durationMin: parseInt(min),
+          durationDay: parseInt(date, 10),
+          durationHr: parseInt(hr, 10),
+          durationMin: parseInt(min, 10),
         },
       });
     } catch (err) {

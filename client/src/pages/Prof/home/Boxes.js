@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
   faCalendar,
-  faUsers,
   faBookReader,
   faChalkboardTeacher,
   faListAlt,

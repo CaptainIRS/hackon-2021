@@ -25,8 +25,10 @@ const FileUpload = () => {
       console.log(data);
       setSubjects(data.profCourse);
       setcourse(
-        data.profCourse.map((op) => (
-          <option value={op.courseCode}>{op.courseCode}</option>
+        data.profCourse.map((op, ind) => (
+          <option key={ind} value={op.courseCode}>
+            {op.courseCode}
+          </option>
         ))
       );
     }

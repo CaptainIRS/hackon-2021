@@ -21,8 +21,8 @@ export default function Join() {
   useEffect(() => {
     if (!loading) {
       setElements(
-        data.profCourse.map((arr) => (
-          <tr>
+        data.profCourse.map((arr, i) => (
+          <tr key={i}>
             <td>{arr.courseCode}</td>
           </tr>
         ))
@@ -33,7 +33,7 @@ export default function Join() {
       console.log(datum);
       setElements([...elements, datum.createCourse.courseCode]);
     }
-  }, [data, loading, datum]);
+  }, [data, loading, datum, elements]);
 
   const changeSubject = (e) => {
     setSubject(e.target.value);

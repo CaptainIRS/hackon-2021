@@ -1,13 +1,8 @@
 import NavBar from "../../../components/Prof/Navbar";
 import Sidebar from "../../../components/Prof/Sidebar";
-import { useSelector } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "preact-router/match";
 const Assignment = () => {
-  const user = useSelector((state) => state.user);
-  const theme = user.theme;
-  const auth = useSelector((state) => state.profauth);
-
   return (
     <>
       <NavBar />
