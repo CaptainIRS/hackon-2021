@@ -41,3 +41,43 @@ export const MUTATION = gql`
     }
   }
 `;
+
+export const CREATEASSIGNMENT = gql`
+  mutation (
+    $question: String
+    $courseCode: String
+    $file: Upload
+    $durationDay: Int
+    $durationHr: Int
+    $durationMin: Int
+  ) {
+    createAssignment(
+      data: {
+        question: $question
+        courseCode: $courseCode
+        file: $file
+        durationDay: $durationDay
+        durationHr: $durationHr
+        durationMin: $durationMin
+      }
+    ) {
+      fileName
+    }
+  }
+`;
+
+export const CREATESUBMISSION = gql`
+  mutation ($assignmentId: String, $file: Upload) {
+    createSubmission(data: { assignmentId: $assignmentId, file: $file }) {
+      fileName
+    }
+  }
+`;
+
+export const CREATESTUDYMATERIAL = gql`
+  mutation ($courseCode: String, $file: Upload) {
+    createStudymaterial(data: { courseCode: $courseCode, file: $file }) {
+      filename
+    }
+  }
+`;

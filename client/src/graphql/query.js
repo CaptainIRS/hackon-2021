@@ -15,6 +15,15 @@ export const STUDENTCOURSE = gql`
       prof {
         name
       }
+      assignment {
+        id
+        question
+        ipfsHash
+      }
+      studymaterial {
+        filename
+        ipfsHash
+      }
     }
   }
 `;
@@ -44,20 +53,29 @@ export const PROFCOURSE = gql`
   query profCourse {
     profCourse {
       courseCode
+      assignment {
+        id
+        question
+        submissions {
+          id
+          fileName
+          isLate
+          ipfsHash
+        }
+      }
     }
   }
 `;
 
-export const PROFASSIGNMENTS = gql`
-  query profCourse {
-    profCourse {
-      assignments {
-        question
-        courseCode
+export const ASSIGNMENT = gql`
+  query assignment($id: String) {
+    assignment(id: $id) {
+      courseCode
+      submissions {
         ipfsHash
-        durationDay
-        durationHr
-        durationMin
+        fileName
+        rollNumber
+        isLate
       }
     }
   }
