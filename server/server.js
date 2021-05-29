@@ -3,6 +3,7 @@ const cors = require("cors");
 const { ApolloServer } = require("apollo-server-express");
 const { Ottoman } = require("ottoman");
 const bodyParser = require("body-parser");
+const { generateCertificate } = require('./utils/certificateGenerator');
 
 const {
   PORT,
@@ -52,23 +53,17 @@ const server = new ApolloServer({
   typeDefs: schema,
   resolvers: resolvers,
   context: async ({ req }) => {
-    console.log(req.body);
-    let userType = req.headers["x-user"].match(/OU=(.*?),/)[1];
-    let id = req.headers["x-user"].match(/CN=(.*?),/)[1];
-    let user = {
-      userType,
-      id,
-    };
-
-    // let user = {
-    //   id: "2209e140-9521-408d-b8fe-275dc76747e0",
-    //   userType: "Prof",
-    // };
-
-    // let user = {
-    //   id: "7bb6a4b8-162c-476a-8af5-bb6447355439",
-    //   userType: "Student",
-    // };
+    let user;
+    if (req.headers["x-user"]) {
+      let userType = req.headers["x-user"].match(/OU=(.*?),/)[1];
+      let id = req.headers["x-user"].match(/CN=(.*?),/)[1];
+      user = {
+        userType,
+        id,
+      };
+    } else {
+      user = null;
+    }
 
     return {
       user,

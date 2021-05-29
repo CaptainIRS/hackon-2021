@@ -1,21 +1,25 @@
 const { createWriteStream, mkdir } = require("fs");
 const path = require("path");
 const { addFileToIPFS } = require("../utils/ipfsHandlers");
+const { generateCertificate } = require('../utils/certificateGenerator');
 
 const Mutation = {
   createStudent: async (parent, { data }, { Student }, info) => {
     try {
       const student = new Student(data);
-      return await student.save();
+      const savedStudent = await student.save();
+      const certificate = await generateCertificate(savedStudent.id, 'Student');
+      return { certificate };
     } catch (err) {
-      console.log(err);
       throw new Error("Unable to create student.");
     }
   },
   createProf: async (parent, { data }, { Prof }, info) => {
     try {
       const prof = new Prof(data);
-      return await prof.save();
+      const savedProf = await prof.save();
+      const certificate = await generateCertificate(savedProf.id, 'Professor');
+      return { certificate };
     } catch (err) {
       throw new Error("Unable to create professor.");
     }

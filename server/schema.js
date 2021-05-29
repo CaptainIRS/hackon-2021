@@ -16,8 +16,8 @@ const typeDefs = gql`
   #Mutation Type
   type Mutation {
     createCourse(data: CreateCourseInput): Course
-    createStudent(data: CreateStudentInput): Student
-    createProf(data: CreateProfInput): Prof
+    createStudent(data: CreateStudentInput): ClientCertificate
+    createProf(data: CreateProfInput): ClientCertificate
     createSubmission(data: CreateSubmissionInput): Submission
     createStudymaterial(data: CreateStudymaterialInput): StudyMaterial
     createAssignment(data: CreateAssignmentInput): Assignment
@@ -61,6 +61,10 @@ const typeDefs = gql`
     ipfsHash: String
   }
 
+  type ClientCertificate {
+    certificate: String
+  }
+
   type Prof {
     id: String
     email: String
@@ -75,6 +79,7 @@ const typeDefs = gql`
     id: String
     course: [Course]
     name: String
+    email: String
     certs: [File]
     needsHelp: Boolean
     mentorName: String
@@ -89,15 +94,12 @@ const typeDefs = gql`
   #input types
   input CreateStudentInput {
     name: String
-    needsHelp: Boolean
-    mentorName: String
+    email: String
   }
 
   input CreateProfInput {
     email: String
     name: String
-    degree: String
-    isDoc: Boolean
   }
 
   input CreateCourseInput {
