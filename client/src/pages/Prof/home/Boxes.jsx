@@ -2,18 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
   faCalendar,
-  faUsers,
   faBookReader,
   faChalkboardTeacher,
   faListAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 const boxes = [
-  { name: "Join Course", icon: faPlus, url: "/student/join" },
-  { name: "Get Certificate", icon: faCalendar, url: "/student/certs" },
-  { name: "Study Material", icon: faBookReader, url: "student/study" },
-  { name: "Online Class", icon: faChalkboardTeacher, url: "/student/online" },
-  { name: "Assignment", icon: faListAlt, url: "/student/assign" },
+  { name: "Create Profile", icon: faPlus, url: "/prof/create" },
+  { name: "Send Certificate", icon: faCalendar, url: "prof/cert" },
+  { name: "Study Material", icon: faBookReader, url: "/prof/study" },
+  { name: "Online Class", icon: faChalkboardTeacher, url: "/prof/online" },
+  { name: "Assignment", icon: faListAlt, url: "/prof/assign" },
 ];
 
 import { route } from "preact-router";

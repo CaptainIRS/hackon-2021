@@ -14,7 +14,6 @@ export default function Sidebar() {
   useEffect(() => {
     if (loading) setIsLoading(true);
     if (data) {
-      console.log(data.studentDetails);
       setProf(data.studentDetails);
       setIsLoading(false);
     }

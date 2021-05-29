@@ -6,10 +6,13 @@ import ProfAssign from "./pages/Prof/assignmentComponents/Assignment";
 import ProfViewAssign from "./pages/Prof/assignmentComponents/ViewSubmissions";
 import ProfNewAssign from "./pages/Prof/assignmentComponents/NewAssignment";
 import ProfManageAssign from "./pages/Prof/assignmentComponents/ManageAssignments";
-import ProfEditAssign from "./pages/Prof/assignmentComponents/EditAssignment";
 import ProfCreateCourse from "./pages/Prof/CreateCourse";
 import ProfReg from "./pages/Prof/authComponents/Register";
 import StudentReg from "./pages/Student/authComponents/Register";
+import StudentAssign from "./pages/Student/assignmentComponents/Assignments";
+import StudentSubmit from "./pages/Student/assignmentComponents/SubmitWork";
+import ProfStudy from "./pages/Prof/studymaterialComponents/StudyMaterial";
+import StudentStudy from "./pages/Student/studymaterialsComponents/StudyMaterials";
 import FirstPage from "./pages/FirstPage";
 import Add from "./pages/add";
 import Upload from "./pages/upload";
@@ -24,6 +27,8 @@ const Routes = () => {
     <div className={`whole ${th}`}>
       <Router>
         <FirstPage path="/" />
+        <StudentAssign path="/student/assign" />
+        <StudentSubmit path="/student/submit/:id" />
         <StudentReg path="/student/login/" />
         <ProfReg path="/prof/login/" />
         <ProfHome path="/prof/home" />
@@ -32,11 +37,12 @@ const Routes = () => {
         <Upload path="/upload" />
         <ProfAssign path="/prof/assign" />
         <ProfManageAssign path="/prof/ManageAssignments" />
-        <ProfEditAssign path="/prof/EditAssignment" />
         <ProfNewAssign path="/prof/NewAssignment" />
-        <ProfViewAssign path="/prof/ViewSubmissions" />
+        <ProfViewAssign path="/prof/ViewSubmissions/:id" />
         <ProfCreateCourse path="/prof/create" />
         <StudentJoin path="/student/join" />
+        <ProfStudy path="/prof/study" />
+        <StudentStudy path="/student/study" />
       </Router>
     </div>
   );

@@ -21,8 +21,8 @@ export default function Join() {
   useEffect(() => {
     if (!loading) {
       setElements(
-        data.profCourse.map((arr, index) => (
-          <tr key={index}>
+        data.profCourse.map((arr, i) => (
+          <tr key={i}>
             <td>{arr.courseCode}</td>
           </tr>
         ))

@@ -1,1 +1,2 @@
-export const BACKEND_API = `http://localhost:3421/api`;
+export const BACKEND_API = "https://airs.local/api/";
+export const IPFS = `http://localhost:9090/ipfs`;
