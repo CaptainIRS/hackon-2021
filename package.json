@@ -1,0 +1,18 @@
+{
+  "name": "hackon-2021",
+  "version": "1.0.0",
+  "description": "Project for Hackon 2.0",
+  "main": "index.js",
+  "repository": "",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "install": "cd client && yarn install  && cd - && cd server && yarn install && cd -",
+    "postinstall": "husky install"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.27.0",
+    "husky": "^6.0.0"
+  }
+}
