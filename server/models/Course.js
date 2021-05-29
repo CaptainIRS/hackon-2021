@@ -8,11 +8,20 @@ const CourseModel = Ottoman.model("Course", {
       ref: "Assignment",
     },
   ],
-  profId: String,
+  prof: {
+    type: String,
+    ref: "Prof",
+  },
   student: [
     {
       type: String,
       ref: "Student",
+    },
+  ],
+  studymaterial: [
+    {
+      ipfsHash: String,
+      filename: String,
     },
   ],
 });

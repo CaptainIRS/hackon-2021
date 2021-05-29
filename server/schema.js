@@ -5,11 +5,12 @@ const typeDefs = gql`
 
   # Query type
   type Query {
-    studentCourse: [String]
+    studentCourse: [Course]
     studentNotInCourse: [Course]
     profCourse: [Course]
     profDetails: Prof
     studentDetails: Student
+    assignment(id: String): Assignment
   }
 
   #Mutation Type
@@ -18,11 +19,10 @@ const typeDefs = gql`
     createStudent(data: CreateStudentInput): Student
     createProf(data: CreateProfInput): Prof
     createSubmission(data: CreateSubmissionInput): Submission
+    createStudymaterial(data: CreateStudymaterialInput): StudyMaterial
     createAssignment(data: CreateAssignmentInput): Assignment
-    joinCourse(id: String, courseCode: String): Course
+    joinCourse(courseCode: String): Course
     singleUpload(file: Upload!): File
-    #submission(regno: Int, id: String, answersheet: Upload!): Submission
-    #updateAssignment(data: CreateAssignmentInput, id: String, questionfile: Upload!): Assignment
   }
 
   #datatypes
@@ -40,7 +40,7 @@ const typeDefs = gql`
   }
 
   type Submission {
-    id: String
+    rollNumber: String
     fileName: String
     file: File
     isLate: Boolean
@@ -53,6 +53,12 @@ const typeDefs = gql`
     assignment: [Assignment]
     prof: Prof
     student: [Student]
+    studymaterial: [StudyMaterial]
+  }
+
+  type StudyMaterial {
+    filename: String
+    ipfsHash: String
   }
 
   type Prof {
@@ -82,7 +88,6 @@ const typeDefs = gql`
 
   #input types
   input CreateStudentInput {
-    id: String
     name: String
     needsHelp: Boolean
     mentorName: String
@@ -110,7 +115,11 @@ const typeDefs = gql`
 
   input CreateSubmissionInput {
     assignmentId: String
-    id: String
+    file: Upload
+  }
+
+  input CreateStudymaterialInput {
+    courseCode: String
     file: Upload
   }
 `;

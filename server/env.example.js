@@ -3,6 +3,7 @@ const IP = "";
 const couchbaseUsername = "";
 const couchbasePassword = "";
 const couchbaseBucket = "";
+const couchbaseString = "";
 
 module.exports = {
   PORT,

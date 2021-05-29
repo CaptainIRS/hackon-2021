@@ -1,6 +1,5 @@
 const { createWriteStream, mkdir } = require("fs");
 const path = require("path");
-const couchbase = require("couchbase");
 const { addFileToIPFS } = require("../utils/ipfsHandlers");
 
 const Mutation = {
@@ -9,6 +8,7 @@ const Mutation = {
       const student = new Student(data);
       return await student.save();
     } catch (err) {
+      console.log(err);
       throw new Error("Unable to create student.");
     }
   },
@@ -22,10 +22,9 @@ const Mutation = {
   },
   createCourse: async (parent, { data }, { user, Course, Prof }, info) => {
     try {
-      let course = new Course(data);
+      let course = new Course({ courseCode: data.courseCode, prof: user.id });
       course = await course.save();
       let prof = await Prof.findById(user.id);
-      console.log(prof);
       if (!prof.course) {
         prof.course = [];
       }
@@ -33,35 +32,58 @@ const Mutation = {
       await prof.save();
       return course;
     } catch (err) {
-      console.log(err);
       throw new Error("Unable to create course.");
     }
   },
   singleUpload: async (parent, data) => {
-    console.log(await data.file);
     try {
-      console.log(await data.file);
       mkdir("FileUploads", { recursive: true }, (err) => {
         if (err) throw err;
       });
-
       const { createReadStream, filename } = await data.file;
+      const writePath = path.join(__dirname, "../FileUploads", filename);
       await new Promise((resolve) =>
         createReadStream()
-          .pipe(
-            createWriteStream(path.join(__dirname, "../FileUploads", filename))
-          )
+          .pipe(createWriteStream(path.join(writePath)))
           .on("close", resolve)
       );
-
+      const ipfsHash = await addFileToIPFS(writePath);
+      console.log(ipfsHash);
       return await data.file;
     } catch (error) {
       throw new Error(error);
     }
   },
+  createStudymaterial: async (parent, { data }, { Course }, info) => {
+    try {
+      const { createReadStream, filename } = await data.file;
+      mkdir("FileUploads", { recursive: true }, (err) => {
+        if (err) throw err;
+      });
+      const writePath = path.join(__dirname, "../FileUploads", filename);
+      await new Promise((resolve) =>
+        createReadStream()
+          .pipe(createWriteStream(writePath))
+          .on("close", resolve)
+      );
+      const ipfsHash = await addFileToIPFS(writePath);
+      let studymaterial = {
+        ipfsHash,
+        filename,
+      };
+      const course = await Course.findOne({ courseCode: data.courseCode });
+      if (!course.studymaterial) {
+        course.studymaterial = [];
+      }
+      course.studymaterial.push(studymaterial);
+      await course.save();
+      return studymaterial;
+    } catch (e) {
+      throw new Error(e);
+    }
+  },
   createAssignment: async (parent, { data }, { Assignment, Course }, info) => {
     try {
-      // console.log(data);
       const { createReadStream, filename } = await data.file;
       mkdir("FileUploads", { recursive: true }, (err) => {
         if (err) throw err;
@@ -96,7 +118,7 @@ const Mutation = {
       throw new Error(error);
     }
   },
-  createSubmission: async (parent, { data }, { Assignment }, info) => {
+  createSubmission: async (parent, { data }, { user, Assignment }, info) => {
     const currtime = Date.now();
     const { createReadStream, filename } = await data.file;
     mkdir("FileUploads", { recursive: true }, (err) => {
@@ -108,6 +130,7 @@ const Mutation = {
     );
     const ipfsHash = await addFileToIPFS(writePath);
     const assignment = await Assignment.findById(data.assignmentId);
+    if (!assignment.submissions) assignment.submissions = [];
     if (
       assignment.uploadedTime +
         86400000 * assignment.durationDay +
@@ -115,38 +138,36 @@ const Mutation = {
         60000 * assignment.durationMin >=
       currtime
     ) {
-      assignment.submission.push({
-        rollNumber: data.rollNumber,
+      assignment.submissions.push({
+        rollNumber: user.id,
         fileName: filename,
         ipfsHash: ipfsHash,
         isLate: false,
       });
       await assignment.save();
       return {
-        rollNumber: data.rollNumber,
         fileName: filename,
-        ipfsHash: filename,
+        ipfsHash: ipfsHash,
         isLate: false,
       };
     } else {
-      assignment.submission.push({
-        rollNumber: data.rollNumber,
+      assignment.submissions.push({
+        rollNumber: user.id,
         fileName: filename,
-        ipfsHash: filename,
+        ipfsHash: ipfsHash,
         isLate: true,
       });
       await assignment.save();
       return {
-        rollNumber: data.rollNumber,
         fileName: filename,
-        ipfsHash: filename,
+        ipfsHash: ipfsHash,
         isLate: true,
       };
     }
   },
   joinCourse: async (parent, args, { user, Student, Course }, info) => {
     try {
-      const student = await Student.findOneById(user.id);
+      const student = await Student.findById(user.id);
       const course = await Course.findOne({ courseCode: args.courseCode });
       if (!course) {
         throw new Error();
@@ -160,7 +181,7 @@ const Mutation = {
       if (!course.student) {
         course.student = [];
       }
-      course.student.push(student.id);
+      course.student.push(user.id);
       return await course.save();
     } catch (err) {
       throw new Error("Unable to join course");

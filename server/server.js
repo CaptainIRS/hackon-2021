@@ -52,23 +52,23 @@ const server = new ApolloServer({
   typeDefs: schema,
   resolvers: resolvers,
   context: async ({ req }) => {
-    // let userType = req.headers["x-user"].match(/OU=(.*?),/)[1];
-    // let id = req.headers["x-user"].match(/CN=(.*?),/)[1];
-    // let user = {
-    //   userType,
-    //   id,
-    // };
-    // if (userType == null) {
-    //   user = {
-    //     userType: "Student",
-    //     id: "7c903843-ffd5-4161-a4e6-9d91c71cf13c",
-    //   };
-    // }
-
-    user = {
-      userType: "Prof",
-      id: "b8a134f0-6541-4304-8458-68d982b2de05",
+    console.log(req.body);
+    let userType = req.headers["x-user"].match(/OU=(.*?),/)[1];
+    let id = req.headers["x-user"].match(/CN=(.*?),/)[1];
+    let user = {
+      userType,
+      id,
     };
+
+    // let user = {
+    //   id: "2209e140-9521-408d-b8fe-275dc76747e0",
+    //   userType: "Prof",
+    // };
+
+    // let user = {
+    //   id: "7bb6a4b8-162c-476a-8af5-bb6447355439",
+    //   userType: "Student",
+    // };
 
     return {
       user,

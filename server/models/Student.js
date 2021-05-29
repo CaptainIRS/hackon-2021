@@ -7,7 +7,6 @@ const StudentModel = Ottoman.model("Student", {
       ref: "Course",
     },
   ],
-  rollNumber: { type: String, required: true },
   name: String,
   certs: [
     {

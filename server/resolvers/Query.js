@@ -1,11 +1,10 @@
 const Query = {
   studentCourse: async (parent, args, { user, Student, Course }, info) => {
     try {
-      const student = await Student.findOneById(user.id);
-      console.log(student.course);
-      const courseIds = student.course;
-
-      return courses;
+      const student = await Student.findById(user.id);
+      return student.course.map(async (assignments) => {
+        return await Course.findById(assignments);
+      });
     } catch (err) {
       throw new Error(err);
     }
@@ -13,12 +12,16 @@ const Query = {
   studentNotInCourse: async (parent, args, { user, Student, Course }, info) => {
     try {
       let courses = await Course.find({});
-      const student = await Student.findOneById(user.id);
+      const student = await Student.findById(user.id);
       let studentCourse = student.course;
-      let intersection = courses.rows.filter(
-        (x) => !studentCourse.includes(x.id)
-      );
-      return intersection;
+      if (studentCourse) {
+        let intersection = courses.rows.filter(
+          (x) => !studentCourse.includes(x.id)
+        );
+        return intersection;
+      } else {
+        return courses.rows;
+      }
     } catch (err) {
       throw new Error(err);
     }
@@ -30,7 +33,7 @@ const Query = {
       const courses = [];
       for (id of courseIds) {
         let course = await Course.findById(id);
-        courses.push(course.courseCode);
+        courses.push(course);
       }
       return courses;
     } catch (err) {
@@ -53,8 +56,14 @@ const Query = {
   },
   studentDetails: async (parent, args, { user, Student }, info) => {
     try {
-      console.log(args);
-      return await Student.findOneById(user.id);
+      return await Student.findById(user.id);
+    } catch (err) {
+      throw new Error(err);
+    }
+  },
+  assignment: async (parent, args, { Assignment }, info) => {
+    try {
+      return await Assignment.findById(args.id);
     } catch (err) {
       throw new Error(err);
     }
