@@ -57,7 +57,6 @@ export const PROFCOURSE = gql`
         id
         question
         submissions {
-          id
           fileName
           isLate
           ipfsHash

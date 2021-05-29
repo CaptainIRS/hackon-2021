@@ -1,17 +1,34 @@
-import { useMutation } from "@apollo/client";
-import { useState } from "react";
+import { gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { CREATEPROF } from "../../../graphql/mutations";
+import { REGISTER_API } from "../../../env";
 
 export default function LoginForm() {
   const [email, setemail] = useState("");
   const [name, setName] = useState("");
   const handleChangeemail = (e) => setemail(e.target.value);
   const handleChangeName = (e) => setName(e.target.value);
-  const [mutate] = useMutation(CREATEPROF);
+
   const submitForm = async (e) => {
     e.preventDefault();
-    mutate({ variables: { name, email } });
+    const cert = (new ApolloClient({
+      cache: new InMemoryCache(),
+      uri: REGISTER_API
+    })).mutate({
+      mutation: gql`
+        mutation ($email: String, $name: String) {
+          createProf(data: { email: $email, name: $name }) {
+            certificate
+          }
+        }
+      `,
+      variables: {
+        name,
+        email
+      }
+    });
+    console.log(cert);
   };
 
   return (

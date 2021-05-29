@@ -10,9 +10,9 @@ export default function FirstPage() {
   };
   const proceed = () => {
     if (state == "Student") {
-      route("/student/login", true);
+      route("/student/register", true);
     }
-    if (state == "Professor") route("/prof/login", true);
+    if (state == "Professor") route("/prof/register", true);
   };
   return (
     <Container fluid className="h100">

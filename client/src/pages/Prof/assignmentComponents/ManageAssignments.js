@@ -28,76 +28,84 @@ const ManageAssignments = () => {
       console.log(theme);
       !theme
         ? setElements(
-            data.profCourse.map((subject, i) => (
-              <Table bordered striped key={i}>
-                <thead className="light2">
-                  <tr>
-                    <th>
-                      <h4>
-                        <u>{subject.courseCode}</u>
-                      </h4>
-                    </th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subject.assignment.map((assignment, ind) => (
-                    <tr key={ind}>
-                      <td style={{ verticalAlign: "middle" }}>
-                        <span className="text-secondary">
-                          {assignment.question}
-                        </span>
-                        <br />
-                      </td>
-                      <td align="right">
-                        <Button
-                          variant="light"
-                          id={assignment.id}
-                          onClick={handleSubmissions}
-                        >
-                          View Submissions
-                        </Button>
-                      </td>
+            data.profCourse.map((subject) => (
+              <>
+                <Table bordered striped>
+                  <thead className="light2">
+                    <tr>
+                      <th>
+                        <h4>
+                          <u>{subject.courseCode}</u>
+                        </h4>
+                      </th>
+                      <th></th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {subject.assignment.map((assignment) => (
+                      <tr>
+                        <td style={{ verticalAlign: "middle" }}>
+                          <span className="text-secondary">
+                            {assignment.question}
+                          </span>
+                          <br />
+                        </td>
+                        <td align="right">
+                          <Button
+                            variant="light"
+                            id={assignment.id}
+                            onClick={handleSubmissions}
+                          >
+                            View Submissions
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <br />
+                <br />
+              </>
             ))
           )
         : setElements(
-            data.profCourse.map((subject, i) => (
-              <Table bordered dark striped key={i}>
-                <thead className="dark2">
-                  <tr>
-                    <th>
-                      <h4>
-                        <u>{subject.courseCode}</u>
-                      </h4>
-                    </th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subject.assignment.map((assignment, ind) => (
-                    <tr key={ind}>
-                      <td style={{ verticalAlign: "middle" }}>
-                        <span className="text-white">
-                          {assignment.question}
-                        </span>
-                      </td>
-                      <td align="right">
-                        <Button
-                          variant="dark"
-                          id={assignment.id}
-                          onClick={handleSubmissions}
-                        >
-                          View Submissions
-                        </Button>
-                      </td>
+            data.profCourse.map((subject) => (
+              <>
+                <Table bordered dark striped>
+                  <thead className="dark2">
+                    <tr>
+                      <th>
+                        <h4>
+                          <u>{subject.courseCode}</u>
+                        </h4>
+                      </th>
+                      <th></th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {subject.assignment.map((assignment) => (
+                      <tr>
+                        <td style={{ verticalAlign: "middle" }}>
+                          <span className="text-white">
+                            {assignment.question}
+                          </span>
+                        </td>
+                        <td align="right">
+                          <Button
+                            variant="dark"
+                            id={assignment.id}
+                            onClick={handleSubmissions}
+                          >
+                            View Submissions
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <br />
+                <br />
+              </>
             ))
           );
     }
