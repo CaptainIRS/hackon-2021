@@ -1,0 +1,57 @@
+
+# SPDX-License-Identifier: Apache-2.0
+version: '2.1'
+
+volumes:
+  pgdata:
+
+networks:
+  airs.dev:
+    external:
+      name: net_test
+
+services:
+
+  explorerdb.airs.dev:
+    image: hyperledger/explorer-db:latest
+    container_name: explorerdb.airs.dev
+    hostname: explorerdb.airs.dev
+    environment:
+      - DATABASE_DATABASE=fabricexplorer
+      - DATABASE_USERNAME=hppoc
+      - DATABASE_PASSWORD=password
+    healthcheck:
+      test: "pg_isready -h localhost -p 5432 -q -U postgres"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - airs.dev
+
+  explorer.airs.dev:
+    image: hyperledger/explorer:latest
+    container_name: explorer.airs.dev
+    hostname: explorer.airs.dev
+    environment:
+      - DATABASE_HOST=explorerdb.airs.dev
+      - DATABASE_DATABASE=fabricexplorer
+      - DATABASE_USERNAME=hppoc
+      - DATABASE_PASSWD=password
+      - LOG_LEVEL_APP=debug
+      - LOG_LEVEL_DB=debug
+      - LOG_LEVEL_CONSOLE=info
+      - LOG_CONSOLE_STDOUT=true
+      - DISCOVERY_AS_LOCALHOST=false
+    volumes:
+      - ./config.json:/opt/explorer/app/platform/fabric/config.json
+      - ./connection-profile:/opt/explorer/app/platform/fabric/connection-profile
+      - ./organizations:/tmp/crypto
+    ports:
+      - 9999:8080
+    depends_on:
+      explorerdb.airs.dev:
+        condition: service_healthy
+    networks:
+      - airs.dev

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="node_modules/xterm/css/xterm.css" />
+    <script src="node_modules/xterm/lib/xterm.js"></script>
+    <title>Admin Panel</title>
+  </head>
+  <body>
+      <style>
+          .row {
+              padding: 20px;
+          }
+          #buttons {
+              max-height: 80vh;
+              overflow-x: hidden;
+              overflow-y: scroll;
+          }
+      </style>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Admin Panel</a>
+        </div>
+      </nav>
+    <div class="container-fluid h-100">
+        <div class="row">
+          <div class="col-sm" id="buttons">
+            
+          </div>
+          <div class="col-sm" id="terminal"></div>
+          <script>
+            const term = new Terminal({
+                fontSize: 20
+            });
+            term.open(document.getElementById('terminal'));
+            var currentScript;
+
+            function reqListener() {
+                term.write('\x1bc') 
+                term.write(this.responseText.trim().replaceAll('\n', '\r\n'));
+                document.getElementById(`${currentScript}Status`).style.display = 'none';
+                // document.getElementById(`${currentScript}`).classList.add('btn-success').remove('btn-outline-secondary');
+            }
+
+            var scripts = [
+                "setenv",
+                "cleanup",
+                "prereqs",
+                "cleanupOrgs",
+                "createPeerOrg_Professors",
+                "createPeerOrg_Students",
+                "createOrdererOrg",
+                "createConsortium",
+                "networkUp",
+                "createChannel",
+                "joinChannel_Professors",
+                "joinChannel_Students",
+                "setAnchorPeer_Professors",
+                "setAnchorPeer_Students",
+                "deployChainCode_Professors",
+                "deployChainCode_Students",
+                "checkChainCodeCommitReadiness",
+                "approveChainCode_Professors",
+                "approveChainCode_Students",
+                "commitChainCode",
+                "queryCommitted",
+                "networkDown"
+            ];
+
+            for(const script of scripts) {
+                document.getElementById('buttons').innerHTML += ` \
+                    <button class="btn btn-outline-secondary btn-lg btn-block w-100 m-1" id="${script}Button" type="button" onclick="runScript('${script}')"> \
+                        <span class="spinner-grow spinner-grow-sm" id="${script}Status" role="status" aria-hidden="true"></span> \
+                        ${script} \
+                    </button> \
+                `;
+                document.getElementById(`${script}Status`).style.display = 'none';
+            }
+
+            function runScript(script) {
+                var oReq = new XMLHttpRequest();
+                currentScript = script;
+                document.getElementById(`${script}Status`).style.display = 'inline-block';
+                oReq.addEventListener("load", reqListener);
+                oReq.open("GET", "http://localhost:3000/scripts/" + script);
+                oReq.send();
+            }
+          </script>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+  </body>
+</html>
