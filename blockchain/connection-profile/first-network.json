@@ -1,0 +1,82 @@
+{
+	"name": "first-network",
+	"version": "1.0.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "admin",
+			"password": "adminpw"
+		},
+		"enableAuthentication": true,
+		"organization": "Professors",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"documentchannel": {
+			"peers": {
+				"peer0.professors.airs.dev": {},
+				"peer0.students.airs.dev": {}
+			},
+			"connection": {
+				"timeout": {
+					"peer": {
+						"endorser": "6000",
+						"eventHub": "6000",
+						"eventReg": "6000"
+					}
+				}
+			}
+		}
+	},
+	"organizations": {
+		"Professors": {
+			"mspid": "ProfessorsMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/professors.airs.dev/users/Admin@professors.airs.dev/msp/keystore/0495e1490d4e025ec5cf121d6083f99e26e4ea76be2396bcedbf58bae14b82ac_sk"
+			},
+			"peers": ["peer0.professors.airs.dev"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/professors.airs.dev/users/Admin@professors.airs.dev/msp/signcerts/cert.pem"
+			}
+		},
+		"Students": {
+			"mspid": "StudentsMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/students.airs.dev/users/Admin@students.airs.dev/msp/keystore/bdec88e68422c89d56602fbdd857aa700938f354dc10d2f853f4d7bd5b2021f7_sk"
+			},
+			"peers": ["peer0.students.airs.dev"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/students.airs.dev/users/Admin@students.airs.dev/msp/signcerts/cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.professors.airs.dev": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/professors.airs.dev/peers/peer0.professors.airs.dev/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.professors.airs.dev:7051"
+		},
+		"peer0.students.airs.dev": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/students.airs.dev/peers/peer0.students.airs.dev/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.students.airs.dev:9051"
+		}
+	},
+	"orderers": {
+		"orderer.airs.dev": {
+		    "tlsCACerts": {
+				"path": "/tmp/crypto/ordererOrganizations/airs.dev/orderers/orderer.airs.dev/tls/ca.crt"
+			},
+		  "url": "grpcs://orderer.airs.dev:7050"
+		}
+	}
+}
