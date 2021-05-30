@@ -29,8 +29,8 @@ const Routes = () => {
         <FirstPage path="/" />
         <StudentAssign path="/student/assign" />
         <StudentSubmit path="/student/submit/:id" />
-        <StudentReg path="/student/login/" />
-        <ProfReg path="/prof/login/" />
+        <StudentReg path="/student/register/" />
+        <ProfReg path="/prof/register/" />
         <ProfHome path="/prof/home" />
         <StudentHome path="/student/home" />
         <Add path="/add/" />

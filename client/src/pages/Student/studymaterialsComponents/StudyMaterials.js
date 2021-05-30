@@ -24,67 +24,75 @@ const StudyMaterials = () => {
       setIsloading(false);
       !theme
         ? setElements(
-            data.studentCourse.map((subject, key) => (
-              <Table key={key} bordered striped>
-                <thead className="light2">
-                  <tr>
-                    <th>
-                      <h4>
-                        <u>{subject.courseCode}</u>
-                      </h4>
-                      {subject.prof.name}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subject.studymaterial.map((studymaterial, ind) => (
-                    <tr key={ind}>
-                      <td>
-                        <a
-                          className="text-secondary"
-                          rel="noopener noreferrer"
-                          href={`${IPFS}/${studymaterial.ipfsHash}`}
-                          target="_blank"
-                        >
-                          {studymaterial.filename}
-                        </a>
-                      </td>
+            data.studentCourse.map((subject) => (
+              <>
+                <Table bordered striped>
+                  <thead className="light2">
+                    <tr>
+                      <th>
+                        <h4>
+                          <u>{subject.courseCode}</u>
+                        </h4>
+                        {subject.prof.name}
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {subject.studymaterial.map((studymaterial) => (
+                      <tr>
+                        <td>
+                          <a
+                            className="text-secondary"
+                            rel="noopener noreferrer"
+                            href={`${IPFS}/${studymaterial.ipfsHash}`}
+                            target="_blank"
+                          >
+                            {studymaterial.filename}
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <br />
+                <br />
+              </>
             ))
           )
         : setElements(
-            data.studentCourse.map((subject, index) => (
-              <Table key={index} bordered dark striped>
-                <thead className="dark2">
-                  <tr>
-                    <th>
-                      <h4>
-                        <u>{subject.courseCode}</u>
-                      </h4>
-                      {subject.prof.name}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subject.studymaterial.map((studymaterial, ind) => (
-                    <tr key={ind}>
-                      <td>
-                        <a
-                          rel="noopener noreferrer"
-                          href={`${IPFS}/${studymaterial.ipfsHash}`}
-                          className="text-white"
-                          target="_blank"
-                        >
-                          {studymaterial.filename}
-                        </a>
-                      </td>
+            data.studentCourse.map((subject) => (
+              <>
+                <Table bordered dark striped>
+                  <thead className="dark2">
+                    <tr>
+                      <th>
+                        <h4>
+                          <u>{subject.courseCode}</u>
+                        </h4>
+                        {subject.prof.name}
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {subject.studymaterial.map((studymaterial) => (
+                      <tr>
+                        <td>
+                          <a
+                            rel="noopener noreferrer"
+                            href={`${IPFS}/${studymaterial.ipfsHash}`}
+                            className="text-white"
+                            target="_blank"
+                          >
+                            {studymaterial.filename}
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <br />
+                <br />
+              </>
             ))
           );
     }

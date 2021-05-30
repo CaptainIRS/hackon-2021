@@ -24,93 +24,101 @@ const Assignments = () => {
       setIsloading(false);
       !theme
         ? setElements(
-            data.studentCourse.map((subject, ind) => (
-              <Table bordered striped key={ind}>
-                <thead className="light2">
-                  <tr>
-                    <th>
-                      <h4>
-                        <u>{subject.courseCode}</u>
-                      </h4>
-                      {subject.prof.name}
-                    </th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subject.assignment.map((assignment, index) => (
-                    <tr key={index}>
-                      <td style={{ verticalAlign: "middle" }}>
-                        <span className="text-secondary">
-                          {assignment.question}
-                        </span>
-
-                        <br />
-                      </td>
-                      <td align="right">
-                        <Button
-                          variant="light"
-                          id={assignment.ipfsHash}
-                          onClick={handleDownload}
-                        >
-                          Download QP
-                        </Button>
-                        <Button
-                          variant="light"
-                          id={assignment.id}
-                          onClick={handleSubmission}
-                        >
-                          Submit Work
-                        </Button>
-                      </td>
+            data.studentCourse.map((subject) => (
+              <>
+                <Table bordered striped>
+                  <thead className="light2">
+                    <tr>
+                      <th>
+                        <h4>
+                          <u>{subject.courseCode}</u>
+                        </h4>
+                        {subject.prof.name}
+                      </th>
+                      <th></th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {subject.assignment.map((assignment, index) => (
+                      <tr>
+                        <td style={{ verticalAlign: "middle" }}>
+                          <span className="text-secondary">
+                            {assignment.question}
+                          </span>
+
+                          <br />
+                        </td>
+                        <td align="right">
+                          <Button
+                            variant="light"
+                            id={assignment.ipfsHash}
+                            onClick={handleDownload}
+                          >
+                            Download QP
+                          </Button>
+                          <Button
+                            variant="light"
+                            id={assignment.id}
+                            onClick={handleSubmission}
+                          >
+                            Submit Work
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <br />
+                <br />
+              </>
             ))
           )
         : setElements(
-            data.studentCourse.map((subject, ind) => (
-              <Table bordered dark striped key={ind}>
-                <thead className="dark2">
-                  <tr>
-                    <th>
-                      <h4>
-                        <u>{subject.courseCode}</u>
-                      </h4>
-                      {subject.prof.name}
-                    </th>
-                    <th> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {subject.assignment.map((assignment, index) => (
-                    <tr key={index}>
-                      <td style={{ verticalAlign: "middle" }}>
-                        <span className="text-white">
-                          {assignment.question}
-                        </span>
-                      </td>
-                      <td align="right">
-                        <Button
-                          variant="dark"
-                          id={assignment.ipfsHash}
-                          onClick={handleDownload}
-                        >
-                          Download QP
-                        </Button>
-                        <Button
-                          variant="dark"
-                          id={assignment.id}
-                          onClick={handleSubmission}
-                        >
-                          Submit Work
-                        </Button>
-                      </td>
+            data.studentCourse.map((subject) => (
+              <>
+                <Table bordered dark striped>
+                  <thead className="dark2">
+                    <tr>
+                      <th>
+                        <h4>
+                          <u>{subject.courseCode}</u>
+                        </h4>
+                        {subject.prof.name}
+                      </th>
+                      <th></th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
+                  </thead>
+                  <tbody>
+                    {subject.assignment.map((assignment, index) => (
+                      <tr>
+                        <td style={{ verticalAlign: "middle" }}>
+                          <span className="text-white">
+                            {assignment.question}
+                          </span>
+                        </td>
+                        <td align="right">
+                          <Button
+                            variant="dark"
+                            id={assignment.ipfsHash}
+                            onClick={handleDownload}
+                          >
+                            Download QP
+                          </Button>
+                          <Button
+                            variant="dark"
+                            id={assignment.id}
+                            onClick={handleSubmission}
+                          >
+                            Submit Work
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+                <br />
+                <br />
+              </>
             ))
           );
     }

@@ -11,17 +11,15 @@ export const CREATECOURSE = gql`
 export const CREATEPROF = gql`
   mutation ($email: String, $name: String) {
     createProf(data: { email: $email, name: $name }) {
-      id
-      name
+      certificate
     }
   }
 `;
 
 export const CREATESTUDENT = gql`
-  mutation ($name: String) {
-    createStudent(data: { name: $name }) {
-      id
-      name
+  mutation ($email: String, $name: String) {
+    createStudent(data: { email: $email, name: $name }) {
+      certificate
     }
   }
 `;
