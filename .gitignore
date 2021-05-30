@@ -6,3 +6,5 @@ build/
 /*.log
 size-plugin.json
 yarn-error.log
+couchbase
+docker-volume

@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { useState } from "preact";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { useState } from "preact/hooks";
 import { Form, Button } from "react-bootstrap";
 import { REGISTER_API } from "../../../env";
 
@@ -12,10 +12,10 @@ export default function LoginForm() {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const cert = (new ApolloClient({
+    const cert = await new ApolloClient({
       cache: new InMemoryCache(),
-      uri: REGISTER_API
-    })).mutate({
+      uri: REGISTER_API,
+    }).mutate({
       mutation: gql`
         mutation ($email: String, $name: String) {
           createStudent(data: { email: $email, name: $name }) {
@@ -25,10 +25,20 @@ export default function LoginForm() {
       `,
       variables: {
         name,
-        email
-      }
+        email,
+      },
     });
     console.log(cert);
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    var json = JSON.stringify(cert.data.createStudent.certificate),
+      blob = new Blob([json]),
+      url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = "Certificate.pfx";
+    a.click();
+    window.URL.revokeObjectURL(url);
   };
 
   return (

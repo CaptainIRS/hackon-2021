@@ -31,7 +31,6 @@ export default function Sidebar() {
       {IsLoading ? null : (
         <>
           <h4>{prof.name}</h4>
-          <h6>{prof.rollNumber}</h6>
           <h6>{prof.email}</h6>
         </>
       )}
@@ -48,7 +47,6 @@ export default function Sidebar() {
       {IsLoading ? null : (
         <>
           <h4>{prof.name}</h4>
-          <h6>{prof.rollNumber}</h6>
           <h6>{prof.email}</h6>
         </>
       )}

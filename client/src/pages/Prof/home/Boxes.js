@@ -29,7 +29,7 @@ export default function Boxes() {
           md={4}
           className="box d-flex justify-content-center light2"
           id={box.name}
-          onClick={() => route(box.url, true)}
+          onClick={() => box.name !== "Online Class" ? route(box.url, true) : window.location.assign(box.url)}
           key={index + 6}
           name={box.name}
         >
@@ -39,13 +39,13 @@ export default function Boxes() {
             className="tpm"
             id={box.name}
             name={box.name}
-            onClick={() => route(box.url, true)}
+            onClick={() => box.name !== "Online Class" ? route(box.url, true) : window.location.assign(box.url)}
           />
           <h6
             className="btm"
             id={box.name}
             name={box.name}
-            onClick={() => route(box.url, true)}
+            onClick={() => box.name !== "Online Class" ? route(box.url, true) : window.location.assign(box.url)}
           >
             {box.name}
           </h6>
@@ -60,7 +60,7 @@ export default function Boxes() {
           md={4}
           className="box d-flex justify-content-center dark2"
           id={box.name}
-          onClick={() => route(box.url, true)}
+          onClick={() => box.name !== "Online Class" ? route(box.url, true) : window.location.assign(box.url)}
           key={index}
           name={box.name}
         >
@@ -71,13 +71,13 @@ export default function Boxes() {
             id={box.name}
             key={box.name}
             name={box.name}
-            onClick={() => route(box.url, true)}
+            onClick={() => box.name !== "Online Class" ? route(box.url, true) : window.location.assign(box.url)}
           />
           <h6
             className="btm dark-color"
             id={box.name}
             name={box.name}
-            onClick={() => route(box.url, true)}
+            onClick={() => box.name !== "Online Class" ? route(box.url, true) : window.location.assign(box.url)}
           >
             {box.name}
           </h6>

@@ -3,6 +3,7 @@ import sidebanner from "../assets/images/sidebannerall.png";
 import { route } from "preact-router";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { Input } from "reactstrap";
+import { REGISTER } from "../env";
 export default function FirstPage() {
   const [state, setstate] = useState();
   const change = (e) => {
@@ -10,9 +11,10 @@ export default function FirstPage() {
   };
   const proceed = () => {
     if (state == "Student") {
-      route("/student/register", true);
+      window.location.assign(REGISTER + "student/register");
     }
-    if (state == "Professor") route("/prof/register", true);
+    if (state == "Professor")
+      window.location.assign(REGISTER + "prof/register");
   };
   return (
     <Container fluid className="h100">
