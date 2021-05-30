@@ -8,7 +8,7 @@ const Mutation = {
     try {
       const student = new Student(data);
       const savedStudent = await student.save();
-      const certificate = await generateCertificate(savedStudent.id, 'Student');
+      const certificate = await generateCertificate(savedStudent.id, savedStudent.email, 'Student');
       return { certificate };
     } catch (err) {
       throw new Error("Unable to create student.");
@@ -18,7 +18,7 @@ const Mutation = {
     try {
       const prof = new Prof(data);
       const savedProf = await prof.save();
-      const certificate = await generateCertificate(savedProf.id, 'Professor');
+      const certificate = await generateCertificate(savedProf.id, savedProf.email, 'Professor');
       return { certificate };
     } catch (err) {
       throw new Error("Unable to create professor.");

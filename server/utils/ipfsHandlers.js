@@ -1,5 +1,5 @@
 const ipfsClient = require("ipfs-http-client");
-const ipfs = ipfsClient.create();
+const ipfs = ipfsClient.create({ port: 5002 });
 
 const addFileToIPFS = async (path) => {
   const file = await ipfs.add(ipfsClient.globSource(path));

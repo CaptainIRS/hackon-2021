@@ -1,8 +1,4 @@
-FROM node:alpine
-
-RUN apk --no-cache add \
-  g++ gcc libgcc libstdc++ linux-headers make python openssl bash && \
-  npm install --quiet node-gyp -g
+FROM node
 
 WORKDIR /app
 
