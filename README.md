@@ -93,3 +93,15 @@ We also were planning on building a feature to provide counselling for the stude
     </td> 
   </tr>
 </table>
+
+
+## Screenshots
+
+| ![](https://i.imgur.com/EtfxkUw.png) | ![](https://i.imgur.com/0KwVfEf.png) |
+|:--:|:--:|
+| ![](https://i.imgur.com/ag64HWt.png) | ![](https://i.imgur.com/5H5QuFc.png) | 
+| ![](https://i.imgur.com/xEXrnvx.png) | ![](https://i.imgur.com/mpqNYng.png) |
+| ![](https://i.imgur.com/HsiMbEC.png) | ![](https://i.imgur.com/eVEAv3p.png) |
+| ![](https://i.imgur.com/6VImJva.png) | ![](https://i.imgur.com/TXa4IPX.jpg) |
+| ![](https://i.imgur.com/fd6HgAs.jpg) | ![](https://i.imgur.com/q7dId71.jpg) |
+
