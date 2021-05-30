@@ -1,8 +1,8 @@
-# Title of project paa
+# AIRS WomxnEdu
 
 ## Project Description
 
-The literacy rate of India is 74.04% (82.14% for males and 65.46% for females). The education in rural areas is much less than in urban areas. This leads to a section of society missing out on a lot of stuff and leads to a vicious cycle. There are a lot of educated and skilled women in India who are unemployed currently due to societal and marital pressures. Our solution is aimed at bringing them togethere. Educated women willing to teach can use our platform to register to teach. A lot of students have laptops issued by various government schemes. The students can use their laptops to access this portal. There are features for students to apply and get certificates regarding the course studied. All the documents are verifiable through a private blockchain. This app uses peer to peer video streaming for online classes. [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) also has features to create courses, join them, create and submit assignments, etc.  
+The literacy rate of India is 74.04%. The education in rural areas is much less than in urban areas. This leads to a section of society missing out on a lot of stuff and leads to a vicious cycle. There are a lot of educated and skilled women in India who are unemployed currently due to societal and marital pressures. Our solution is aimed at bringing them together. Educated women willing to teach can use our platform to register to teach. A lot of students have laptops issued by various government schemes. The students can use their laptops to access this portal. There are features for students to apply and get certificates regarding the course studied. All the documents are verifiable through a private blockchain. This app uses peer to peer video streaming for online classes. [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) also has features to create courses, join them, create and submit assignments, etc.  
 We also were planning on building a feature to provide counselling for the students, but couldn't finish it due to time constraints.  
 
 ## Technologies Used
