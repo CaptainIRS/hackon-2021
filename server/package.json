@@ -5,26 +5,31 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "nodemon",
+    "start": "nodemon server.js",
     "lint": "eslint . --ext .js",
-    "postinstall": "cd node_modules/@apollographql && cp ../graphql-upload/ . -r && rm -rf graphql-upload-8-fork/ && mv graphql-upload/ graphql-upload-8-fork"
+    "postinstalljj": "cd node_modules/@apollographql && cp ../graphql-upload/ . -r && rm -rf graphql-upload-8-fork/ && mv graphql-upload/ graphql-upload-8-fork"
   },
   "dependencies": {
     "apollo-server": "^2.25.0",
     "apollo-server-express": "^2.25.0",
+    "bindings": "^1.5.0",
     "cors": "^2.8.5",
     "eslint-config-prettier": "^8.3.0",
     "express": "^4.17.1",
+    "fs-capacitor": "^7.0.1",
     "graphql": "^15.5.0",
     "graphql-upload": "^12.0.0",
     "ipfs-http-client": "^50.1.0",
+    "node-fetch": "^2.6.1",
     "ottoman": "^2.0.0-beta.1",
-    "prettier": "^2.3.0"
+    "prettier": "^2.3.0",
+    "socket.io": "^1.3.7"
   },
   "devDependencies": {
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.3",
-    "eslint-plugin-prettier": "^3.4.0"
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7"
   }
 }

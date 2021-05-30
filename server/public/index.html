@@ -5,7 +5,6 @@
 		<title>Live Stream From the Browser</title>
 		<script src="socket.io.js"></script>
 		<link rel="stylesheet" href="style.css" />
-		<link rel="icon" href="icon.ico" />
 		<script>
 			var __nspid = "isrtzw";
 			var __nsptags = [];
@@ -30,11 +29,6 @@
 				}
 			})(window, document);
 		</script>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script
-			async
-			src="https://www.googletagmanager.com/gtag/js?id=G-N9E9YP1HGF"
-		></script>
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
@@ -95,7 +89,8 @@
 				value="Create Live"
 			/>
 		</div>
-
+    <div id="meetid" class="form">
+    </div>
 		<label class="form" style="display: none">Reconnection </label>
 		<br />
 		<div class="form">Connect the server, then start streaming.</div>
@@ -136,9 +131,12 @@
 			createRTMPLink.addEventListener("click", (e) => {
 				const title = document.getElementById("videoTitle").value;
 				$.get(
-					`http://localhost:1234/getNewRTMPLink/${title}`,
+					`http://localhost:4000/getNewRTMPLink/${title}`,
 					function (data, status) {
 						console.log(data);
+            document.getElementById('meetid').append(`
+             Meet ID is ${data.uuid} 
+            `)
 						document.getElementById("option_url").value =
 							data.rtmpUrl + "/" + data.streamKey;
 					}
